@@ -1,12 +1,24 @@
 # Chipflow Homebrew tap
 
-Install the stable Chipflow 1.0 release on Linux:
+Install the stable Chipflow 1.1 release on Linux:
 
 ```sh
 brew install shreenxdhi/chipflow/chipflow
 chipflow setup
-chipflow verify --target sim
+chipflow quickstart first-chip
+chipflow guide
 ```
+
+For native Tcl customization:
+
+```sh
+chipflow init custom-chip --expert
+chipflow hooks
+chipflow variables --search clock
+```
+
+The browser offers Learning and Expert modes, including a complete YAML copy
+editor. Tcl bundles and declared library files are preserved with each run.
 
 The first installation builds dependencies from source and can take several minutes.
 Chipflow checks prerequisites and suggests EDA tools; it does not install EDA binaries
