@@ -1,25 +1,30 @@
 # Chipflow Homebrew tap
 
-Install the local RTL-to-GDS workflow manager on Linux:
+Install the stable Chipflow 1.0 release on Linux:
 
 ```sh
 brew install shreenxdhi/chipflow/chipflow
 chipflow setup
-chipflow init counter-demo
-chipflow run counter-demo/chipflow.yaml --target sim --wait
+chipflow verify --target sim
 ```
 
-The formula installs the manager into its own Python environment. EDA tools,
-ORFS, and platform data are separate; `chipflow setup` checks them and suggests
-installation steps without executing those steps.
+The first installation builds dependencies from source and can take several minutes.
+Chipflow checks prerequisites and suggests EDA tools; it does not install EDA binaries
+or licensed platform data. The supported execution model is single-user local Linux.
+See the [operations guide](https://github.com/shreenxdhi/chipflow/blob/main/docs/OPERATIONS.md).
 
-This initial beta is built from source and may compile Rust-based Python
-dependencies. The tap is not a homebrew/core listing. Linux is the validated host;
-macOS is not currently supported by this formula.
+To upgrade, wait for running jobs and back up your history:
 
-Source and documentation: https://github.com/shreenxdhi/chipflow
-Release: https://github.com/shreenxdhi/chipflow/releases/tag/v0.1.0
+```sh
+chipflow backup chipflow-history-before-upgrade.tar.gz
+brew update
+brew upgrade shreenxdhi/chipflow/chipflow
+```
 
-Maintainers generate the pinned resources and archive checksum from the exact
-release using scripts/generate_formula.py in the main repository. Formula CI runs
-a real source installation and the functional `brew test`.
+The formula pins source archives and SHA-256 checksums, uses a private Python
+virtual environment, and has an installed CLI/project/backup/restore test. CI
+installs the formula from source and runs `brew test`. This is a third-party tap;
+it is separate from homebrew/core.
+
+Source: https://github.com/shreenxdhi/chipflow
+Releases: https://github.com/shreenxdhi/chipflow/releases
